@@ -1,0 +1,573 @@
+\documentclass[aps,nofootinbib]{revtex4}
+
+\usepackage{mathpazo}
+
+\usepackage{amsmath}
+\usepackage{amsfonts,amssymb,amsthm, bbm,braket}
+\usepackage{graphicx}   % need for figures
+\usepackage{subfigure}  % and subfigures
+\usepackage{amsbsy} % for bold greek letters
+\usepackage[bold]{hhtensor}
+
+%--------------------------------MACROS-------------------------------------------------------------------------------
+
+\newcommand\red{\color{red}}
+\newcommand\magn{\color{magenta}}
+\newcommand\Tr{\mathrm{Tr}}
+
+%--------------------------------ENVIRONMENTS-------------------------------------------------------------------------------
+
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{question}{Question}
+
+%--------------------------------ENVIRONMENTS-------------------------------------------------------------------------------
+
+\usepackage[breaklinks=true]{hyperref}
+
+%getting rid of hyperref's ugly boxes.
+%From:http://tex.stackexchange.com/a/51349
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = blue, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor   = magenta %Colour of citations
+}
+
+\begin{document}
+
+\title{A Poor Man's Guide to Lie Theory}
+
+
+\author{Ninnat Dangniam}
+\affiliation{
+Center for Quantum Information and Control,
+University of New Mexico,
+Albuquerque, New Mexico, 87131-0001}
+
+
+%\author{Christopher Ferrie}
+%\affiliation{Centre for Engineered Quantum Systems, School of Physics, The University of Sydney, Sydney, NSW 2006, Australia
+%}
+
+\date{\today}
+
+
+\begin{abstract}
+The goal of this guide is to give a feel about how Lie groups, Lie
+algebras, and their representations interact as quickly as possible. It
+is not meant to be very precise.
+\end{abstract}
+
+\maketitle
+
+\section{Lie groups and Lie algebras}
+
+The relation between Lie groups and Lie algebras is encapsulated in
+this statement: \emph{the categories of connected, simply-connected
+Lie groups and finite-dimensional Lie algebras are the same.} (\ref{Lie subgroup},\ref{adjoint},\ref{Lie algebra}) It cannot
+be the category of all Lie groups because Lie algebras cannot know
+the global topology of Lie groups. So we often study connected, simply-connected
+covering groups instead of the groups that are of interest to us.
+
+\begin{enumerate}
+\item A \textbf{Lie group} $G$ is a group that is also a smooth manifold.
+Roughly speaking, a \textbf{manifold} $M$ is a space that is locally
+Euclidean i.e. the chart $\varphi$ mapping an open set $U$ to a
+subset of $\mathbb{R}^{n}$ gives a point $p\in M$ coordinates in
+$\mathbb{R}^{n}$. The \textbf{dimension} of a Lie group is $n$,
+the dimension of the manifold.
+
+\item \label{Lie algebra} A \textbf{Lie algebra} is a vector space $\mathfrak{g}$ over a field $k$, equipped with a bilinear map $\left[,\right]:\mathfrak{g}\times\mathfrak{g}\to\mathfrak{g}$,
+the \textbf{Lie bracket}, which is skew-symmetric $\left[x,y\right]=-\left[y,x\right]$
+(or equivalently, $\left[x,x\right]=0$) and satisfies the Jacobi
+identity
+\begin{align*}
+\left[x,\left[y,z\right]\right]+\left[y,\left[z,x\right]\right]+\left[z,\left[x,y\right]\right] & =0.
+\end{align*}
+To understand the Jacobi identity, let us look at the \textbf{adjoint
+map} that takes an element $x\in\mathfrak{g}$ and turns it into an
+endomorphism (homomorphism to $\mathfrak{g}$ itself) of $\mathfrak{g}$.
+\begin{align*}
+\mbox{ad}:\mathfrak{g} & \to\mbox{End}\mathfrak{g}\\
+\mbox{ad}x\left(y\right) & =\left[x,y\right].
+\end{align*}
+One can check that it really is a homomorphism:
+\begin{align*}
+\mbox{ad}\left(\left[x,y\right]\right) & =\left[\mbox{ad}x,\mbox{ad}y\right].
+\end{align*}
+So it is a representation of the Lie algebra called an \textbf{adjoint
+representation }of $\mathfrak{g}$. It will play an important
+role in the structure theory of semisimple Lie algebras.
+
+Fixing the element $x$, the Jacobi idensity precisely means that
+$\mbox{ad}x$ is a \textbf{derivation} (obeying Leibniz rule):
+\begin{align*}
+\mbox{ad}x\left(\left[y,z\right]\right) & =\left[\mbox{ad}x\left(y\right),z\right]+\left[y,\mbox{ad}x\left(z\right)\right].
+\end{align*}
+This ties in with another definition of a Lie algebra of a Lie group
+as the tangent space at the identity $T_{e}G=\left\{ X|e^{tX}\in G,t\in\mathbb{R}\right\} $
+of $G$, which is isomorphic to the set of partial differential operators
+at the identity. Thus, the \textbf{dimension }of the Lie group and
+that of its Lie algebra are the same.
+
+Every Lie group has a Lie algebra. The best converse of this statement
+is \textbf{Lie's third theorem}: any abstractly defined Lie algebra
+has a corresponding connected, simply-connected Lie group.
+
+\item \label{left-invariant vector field} The standard mathematical definition of the Lie algebra of a Lie group $G$ is the set of left-invariant vector fields on $G$. The
+set of all vector fields can be given the structure of a Lie algebra
+by the Lie bracket, but only left-invariant vector fields are determined
+by their values at the identity, hence the definition in \ref{Lie algebra}. We prove
+this statement here.
+
+To prepare ourselves, think of a group element $g\in G$ as an automorphism
+of the algebra $C^{\infty}(M)$ of smooth functions on a manifold $M$ that translates functions:
+\begin{align*}
+\left(gf\right)\left(p\right) & =f\left(g^{-1}p\right).
+\end{align*}
+This induces an action on vector fields. Define the \textbf{Adjoint
+map }(with a capital ``A'') as ($X$ is a vector field)
+\begin{align*}
+\mbox{Ad}_{g}X & =gXg^{-1}.
+\end{align*}
+The value of $\mbox{Ad}_{g}X$ at point $q=gp$ can be computed at
+point $p$.
+\begin{align*}
+\left(\mbox{Ad}_{g}X\right)_{q} & =dg_{p}\left(X_{p}\right).
+\end{align*}
+Let us unpack this little formula. $g:M\to M$ is an automorphism
+of $M$. $dg_{p}:T_{p}M\to T_{gp}M=T_{q}M$ is the differential of
+the map $g$ at point $p$. So both the right hand side $dg_{p}\left(X_{p}\right)$
+and the left hand side are in the tangent space at $q$.
+
+Now we can understand what left-invariant vector fields mean. Take $M=G$ the Lie group itself. Let $L_{g}$ be the left action on the group itself: $L_{g}\left(h\right)=gh$.
+A vector field is \textbf{left-invariant }if $L_{g}X=XL_{g}$ i.e.
+$\mbox{Ad}_{g}X=X$. As promised, the left-invariant vector field
+at any point $g\in G$ can be seen to be determined by its value at the origin $X_{e}$:
+\begin{align*}
+X_{g} & =\left(\mbox{Ad}_{g}X\right)_{g}=dg_{e}\left(X_{e}\right)
+\end{align*}
+
+
+\item \label{adjoint} The Adjoint map $\mbox{Ad}_{g}:G\to\mbox{End}\mathfrak{g}$ (\ref{left-invariant vector field}) is a homomorphism
+\begin{align*}
+\mbox{Ad}_{g}\mbox{Ad}_{h} & =\mbox{Ad}_{gh}.
+\end{align*}
+So it is a representation of the group called the \textbf{Adjoint
+representation} of $G$. Its differential is the adjoint map $\mbox{ad}:\mathfrak{g}\to\mbox{End}\mathfrak{g}$
+from \ref{Lie algebra}. They are related by
+\begin{align*}
+\mbox{Ad}_{e^{x}} & =e^{\mbox{ad}x}.
+\end{align*}
+More concretely, suppose that $g=e^{tx}\in G$ and $y\in\mathfrak{g}$.
+\begin{align*}
+\left.\frac{d}{dt}\mbox{Ad}_{g}\left(y\right)\right|_{t=0} & =\left.\frac{d}{dt}\left(e^{tx}ye^{-tx}\right)\right|_{t=0}=\left[x,y\right]=\mbox{ad}x\left(y\right)
+\end{align*}
+This is a special case of the relation between any Lie group and Lie
+algebra homomorphism
+\begin{align*}
+\Pi\left(e^{x}\right) & =e^{d\Pi\left(x\right)},
+\end{align*}
+which is the manifestation of \textbf{Lie's second theorem}: $\mbox{Hom}\left(G,G'\right)=\mbox{Hom}\left(\mathfrak{g},\mathfrak{g}'\right)$
+if $G$ is simply connected. The corresponding statement for representations
+$\Pi$ is that $\Pi\to d\Pi$ gives the equivalence of the categories
+of representations of $G$ and representations of $\mathfrak{g}$.
+Moreover, the vector spaces of intertwining operators (morphisms of representations) are isomorphic:
+$\mbox{Hom}_{G}\left(V,W\right)=\mbox{Hom}_{\mathfrak{g}}\left(V,W\right)$.
+
+
+\item \label{Lie subgroup} A \textbf{Lie subalgebra} $\mathfrak{h}$ of $\mathfrak{g}$ is a vector subspace such that $\left[\mathfrak{h},\mathfrak{h}\right]\subset\mathfrak{h}$.
+A Lie subalgebra of $\mathfrak{g}$ corresponds to a subgroup of $G$
+which is also an immersed submanifold, called a \textbf{Lie subgroup
+}of $G$. A map $F:M\to N$ is a \textbf{smooth immersion} if its
+differential $dF$ is injective at every point: $\mbox{rank}F=\dim M$.
+(To remember the names, an \textbf{i}mmersion is \textbf{i}njective,
+whereas a \textbf{s}ubmersion is \textbf{s}urjective.) An \textbf{immersed
+submanifold }$S$ of $M$ is a topological manifold (not necessary
+having the topology of $M$) together with the inclusion map $S\to M$
+which is a smooth immersion.\textbf{ Lie's first theorem }identifies
+every Lie subalgebra with a connected Lie subgroup and vice versa.
+
+\item Just be aware that there is no standard definition of a Lie subgroup.
+Another notion of a submanifold is that of an \textbf{embedded submanifold},
+which can be obtained for instance by setting some coordinates to
+zero. The key difference is that embedding has to be a homeomorphism
+preserving the global topology. Two classic examples of immersions
+that do not preserve the global topology are the ``figure-eight''
+map and the irrational winding of a torus. \cite{Lee12} The former maps an open
+interval in $\mathbb{R}$ to a closed set in $\mathbb{R}^{2}$. The
+latter takes a line with an irrational slope in $\mathbb{R}^{2}$
+and map it to a torus. The line will densely wind around the entire
+torus. We will call a subgroup which is an embedded submanifold an
+\textbf{embedded Lie subgroup}. Fulton and Harris \cite{FH91}, for example, give
+the opposite definitions; their Lie subgroups are our embedded Lie
+subgroup, whereas our Lie subgroups are their immerse Lie subgroups.
+
+By the \textbf{closed subgroup theorem}, a subgroup is an embedded
+Lie subgroup if and only if it is a closed set. Given a closed subgroup
+$H\subset G$, this makes $G/H$ a \textbf{homogeneous space}, a smooth
+manifold with a transitive group action.
+
+\end{enumerate}
+
+\section{Complex semisimple Lie algebras and their representations}
+
+{\bf From now on, a Lie algebra is over the complex field $k=\mathbb{C}$ unless stated otherwise}. A Lie algebra is semisimple if and only if it has a root decomposition. (\ref{root decomposition}) The tool to study semisimple Lie algebras and their representations is a generalization of the theory of angular momentum in quantum mechanics (\ref{angular momentum}) familiar to every physicist.
+
+\begin{enumerate}
+
+\item \label{glossary} Glossary of notions borrowed from group and ring theories:
+
+An \textbf{ideal} $\mathfrak{h}$ of $\mathfrak{g}$ is a vector subspace
+such that $\left[\mathfrak{h},\mathfrak{g}\right]\subset\mathfrak{h}$.
+An ideal is automatically a Lie subalgebra. An ideal of $\mathfrak{g}$
+corresponds to a \textbf{normal subgroup} $H$ of $G$: $gH=Hg$ for
+all $g\in G$.
+
+The \textbf{idealizer }of a set $S\in\mathfrak{g}$ consists of all
+elements of $\mathfrak{g}$ that preserve $S$ through the commutator:\textbf{
+}$I\left(\mathfrak{h}\right)=\left\{ x|\mbox{ad}x\left(S\right)\subset S\right\} $.
+Sometimes the word ``normalizer'' is used instead.
+
+The \textbf{centralizer }of a set $S\in\mathfrak{g}$ consists of
+all elements of $\mathfrak{g}$ that commute with all elements of
+$S$: $C\left(S\right)=\left\{ x|\mbox{ad}x\left(S\right)=0\right\} $.
+The \textbf{center }is the centralizer of the whole Lie algebra. A
+commutative Lie algebra is called \textbf{abelian}.
+
+Both idealizers and centralizers are subalgebras.
+
+A Lie algebra $\mathfrak{g}$ is \textbf{solvable }if its \textbf{derived
+series }of ideals\textbf{ }$\mathfrak{g}^{i+1}=\left[\mathfrak{g}^{i},\mathfrak{g}^{i}\right]$
+terminates. ($\mathfrak{g}^{1}=\mathfrak{g}$.) In an algebraically
+closed field, we can always choose a basis such that $\mbox{ad}x$
+matrix is upper-triangular for all $x\in\mathfrak{g}$ by the \textbf{Lie
+theorem}. Every abelian Lie algebra is solvable.
+
+A Lie algebra $\mathfrak{g}$ is \textbf{nilpotent }if its \textbf{lower
+central series }of ideals\textbf{ }$\mathfrak{g}_{i+1}=\left[\mathfrak{g},\mathfrak{g}_{i}\right]$
+terminates. ($\mathfrak{g}_{1}=\mathfrak{g}$.) A nilpotent Lie algebra
+is automatically solvable. We can always choose a basis such that
+$\mbox{ad}x$ matrix is strictly upper-triangular (i.e. nilpotent)
+for all $x\in\mathfrak{g}$ by \textbf{Engel theorem}.
+
+\item The standard equivalent definition of a \textbf{semisimple Lie
+algebra} is a Lie algebra that has no nonzero solvable ideal. This
+implies that semisimple Lie algebras do not have a center because
+0 is contained in every Lie subalgebra. Thus, being semisimple is
+as far from being abelian as possible. A Lie algebra is \textbf{simple
+}if it is not abelian and has no nontrivial ideal. We will see below
+that every semisimple Lie algebra is made up of simple Lie algebras.
+(If abelian Lie algebras are not excluded, simple Lie algebras may
+not be semisimple.) 
+
+With five exceptions, every simple complex Lie
+algebra is isomorphic to one of the followings: $\mathfrak{sl}\left(n,\mathbb{C}\right),\mathfrak{so}\left(n,\mathbb{C}\right)$
+or $\mathfrak{sp}\left(2n,\mathbb{C}\right)$.
+
+A connection to semisimple (diagonalizable) matrices is that a semisimple
+Lie algebra always contain at least one nonzero \textbf{semisimple
+element}, $x$ whose $\mbox{ad}x$ matrix is semisimple. This follows
+from a generalization of the Jordan decomposition in linear algebra:
+every element in a semisimple Lie algebra can be written as a sum
+of commuting semisimple and nilpotent element:
+\begin{align*}
+x & =x_{s}+x_{n},\\
+\left[x_{s},x_{n}\right] & =0.
+\end{align*}
+If $x_{s}=0$ for any $x\in\mathfrak{g}$, then by Engel theorem,
+$\mathfrak{g}$ is nilpotent hence solvable, contradicting the semisimplicity
+of $\mathfrak{g}$.
+
+
+
+\item \label{Levi} \textbf{Levi theorem }states that every Lie algebra can be written
+as the sum of its unique largest solvable ideal, the \textbf{radical}
+$\mbox{rad}\left(\mathfrak{g}\right)$, and a semisimple Lie subalgebra
+$\mathfrak{s}$:
+\begin{align*}
+\mathfrak{g} & =\mbox{rad}\left(\mathfrak{g}\right)\oplus\mathfrak{s}.
+\end{align*}
+Recall that solvability is a generalization of abelianity, so every
+Lie algebra is a sum of one part that is close to being abelian and
+the other part that is far from being abelian. If the first part is
+actually abelian, we call the Lie algebra \textbf{reductive}. Any ideal $I$ in a reductive Lie algebra has a complementary ideal $I^{\perp}$ such that $\mathfrak{g} = I \oplus I^{\perp}$.
+
+\item A \textbf{toral subalgebra }is an abelian subalgebra that consists
+of semisimple elements. A \textbf{Cartan subalgebra} is a maximal
+toral subalgebra which corresponds to a \textbf{maximal torus} in $G$,
+hence the name ``toral''.
+
+For semisimple Lie algebras, the standard definition of a Cartan
+subalgebra is a toral subalgebra and self-centralizing: $C\left(\mathfrak{h}\right)=\left\{ x|\mbox{ad}x\left(\mathfrak{h}\right)=0\right\} =\mathfrak{h}$.
+For the curious reader, the general definition that works for any
+Lie algebra is that a subalgebra is Cartan if it is nilpotent and
+self-idealizing: $I\left(\mathfrak{h}\right)=\left\{ x|\mbox{ad}x\left(\mathfrak{h}\right)\subset\mathfrak{h}\right\} =\mathfrak{h}$.
+(The reduction to centralizing in the semisimple case is, of course,
+due to the toricity.) But since we are not going to pursue the general
+definition here, we take the semisimple definition to be \emph{the}
+definition of a Cartan subalgebra, which can be shown to be equivalent
+to the definition as a maximal toral subalgebra in the semisimple
+case.
+
+The \textbf{rank }of a Lie algebra is the dimension of its Cartan
+subalgebra. Even though a Cartan algebra is not unique, this notion
+makes sense because all Cartan subalgebras are conjugated, hence have
+the same dimension.
+
+\item \label{Killing form} A bilinear form (or sesquilinear form for a complex vector space)
+$\left\langle ,\right\rangle $ is \textbf{invariant }under the action
+of $G$ if
+\begin{align*}
+\left\langle \mbox{Ad}_{g}y,\mbox{Ad}_{g}z\right\rangle  & =\left\langle y,z\right\rangle
+\end{align*}
+or equivalently, by setting $g=e^{tx}$ and differentiate w.r.t. $t$
+at the origin,
+\begin{align*}
+\left\langle \mbox{ad}x\left(y\right),z\right\rangle +\left\langle y,\mbox{ad}x\left(z\right)\right\rangle  & =0
+\end{align*}
+i.e. $\text{ad}x$ is antisymmetric w.r.t. the form. Any representation gives an invariant bilinear form $\left\langle x,y\right\rangle =\mbox{Tr}\left(\rho\left(x\right),\rho\left(y\right)\right)$.
+It turns out to be very useful to take $\rho$ to be the adjoint representation itself.
+Then we have the \textbf{Killing form}
+\begin{align*}
+\left\langle x,y\right\rangle  & =\mbox{Tr}\left(\mbox{ad}x,\mbox{ad}y\right).
+\end{align*}
+A bilinear form can be degenerate so it may not be an inner product,
+but the Killing form on $\mathfrak{g}$ is nondegenerate if and only
+if $\mathfrak{g}$ is semisimple\textbf{ }(\textbf{Cartan's criteria
+for semisimplicity}). So it identifies a Cartan subalgebra $\mathfrak{h}$
+and its dual $\mathfrak{h}^{*}$.
+
+\item \label{compact Lie algebra} 
+A Lie algebra of a compact real Lie group is reductive and has a negative semidefinite Killing form. Conversely, a semisimple real Lie algebra with a negative definite Killing form is a Lie algebra of a compact real Lie group. (There is no nontrivial real Lie algebra with a positive definite Killing form.) A Lie algebra of a compact Lie group is called a {\bf compact Lie algebra}.
+
+The matrices of the adjoint representation can be made antisymmetric i.e. the structure constant can be made totally antisymmetric, if the Lie algebra is a direct sum of simple compact Lie algebras. Example: $\mathfrak{su}(2)$. Counterexample: the adjoint representation of the Heisenberg Lie algebra $\mathfrak{h}$ is nilpotent and thus not antisymmetric. This is consistent with the fact that $\mathfrak{h}$ is not simple because it has a one-dimensional ideal: $[\mathbb{1},x]=0$ for all $x$ in $\mathfrak{h}$.
+
+\item \label{root decomposition} Let $\mathfrak{h}$ be a Cartan subalgebra. It is toral, so $\mbox{ad}h$
+for all $h\in\mathfrak{h}$ are simultaneously diagonalizable. Nonzero
+eigenvalues of arbitary linear combinations in $\mathfrak{h}$ define
+a set (not necessarily a vector space) of \textbf{roots} $\alpha\in R\subset\mathfrak{h}^{*}-\left\{ 0\right\} $.
+Each root labels a \textbf{root space} $\mathfrak{h}_{\alpha}=\left\{ x\in\mathfrak{g}|\mbox{ad}h\left(x\right)=\left\langle \alpha,h\right\rangle x\right\} $.
+By an abuse of notation, a root can also refer to the number $\alpha\left(h\right):=\left\langle \alpha,h\right\rangle $.
+\begin{enumerate}
+\item \textbf{Root} \textbf{decomposition}:\textbf{ }the Lie algebra splits
+into eigenspaces of $\mbox{ad}h$:
+\begin{align*}
+\mathfrak{g} & =\mathfrak{h}\oplus\bigoplus_{\alpha\in R}\mathfrak{h}_{\alpha}
+\end{align*}
+
+\item $\left[\mathfrak{h}_{\alpha},\mathfrak{h}_{\beta}\right]\subset\mathfrak{h}_{\alpha+\beta}$
+\item If $\alpha+\beta\neq0$, then $\mathfrak{h}_{\alpha}$ and $\mathfrak{h}_{\beta}$
+are orthogonal w.r.t. the Killing form. This is because
+\begin{align*}
+\bra{h_{\gamma}} \mbox{ad}h_{\alpha}\mbox{ad}h_{\beta} \ket{h_{\gamma}} & = \braket{h_{\gamma}|h_{\left(\alpha+\beta\right)+\gamma}}=0
+\end{align*}
+for all $\gamma$. That is, $\mbox{ad}h_{\alpha}\mbox{ad}h_{\beta}$
+has no diagonal element. Therefore, the trace is zero.
+\end{enumerate}
+Roots are special cases of weights. (\ref{weight})
+
+\item A \textbf{root system }is a finite set of vectors (roots) of a
+Euclidean space $E$ with rigid geometrical relations:
+\begin{enumerate}
+\item For any two roots $\alpha$ and $\beta$, the projection of $\beta$
+onto $\alpha$ is a half-integer multiple of $\alpha$.
+\item The reflection of $\beta$ around the hyperplane $p\cdot\alpha=0$
+gives another root. The group generated by these reflections is called
+the \textbf{Weyl group}.
+\end{enumerate}
+
+Associated with each root $\alpha$ is a \textbf{coroot} $\alpha^{\vee}\in E$
+defined by
+\begin{align*}
+\left\langle \alpha^{\vee},\beta\right\rangle  & =\frac{2\alpha\cdot\beta}{\alpha\cdot\alpha}.
+\end{align*}
+There is a set of \textbf{simple roots }$\alpha_{j}$ such that every
+root $\alpha$ can be uniquely written as an integral linear combination
+of simple roots
+\begin{align*}
+\alpha & =\sum n_{j}\alpha_{j},
+\end{align*}
+where $n_{j}\in\mathbb{Z}$. Because of the Weyl reflection, we may consider only the set $R_+$ of {\bf positive roots} ($\forall n_{j}>0$).
+
+\item \label{Dynkin diagram} Root systems are in one-one correspondence to semisimple Lie algebras. The point of introducing them is that they can be classified completely according to their {\bf Dynkin diagrams}.
+
+\item \label{weight} We enlarge the root system $R$ to a \textbf{root lattice} $Q$,
+an abelian group generated by $R$ (by vector addition in $E$). Similarly,
+the \textbf{coroot lattice }$Q^{\vee}$ is generated by $\alpha^{\vee}$.
+The \textbf{weight lattice }$P$ is the dual lattice of $Q^{\vee}$:
+\begin{align*}
+P & =\left\{ \lambda\in E|\left\langle \lambda,\alpha^{\vee}\right\rangle \in\mathbb{Z},\forall\alpha^{\vee}\in Q^{\vee}\right\} .
+\end{align*}
+(This is simply the definition of a dual lattice.) Let $\pi$ be a
+representation of $\mathfrak{g}$ on $V$. A vector $v\in V$ is called
+a vector of \textbf{weight} $\lambda\in\mathfrak{h}^{*}$ if $hv=\left\langle \lambda,h\right\rangle v$
+for all $h\in\mathfrak{h}$. Then $V$ decomposes into weight spaces:
+\begin{align*}
+V & =\bigoplus_{\lambda}V_{\lambda}:=\bigoplus_{\lambda}\left\{ v\in V|hv=\left\langle \lambda,h\right\rangle v,\forall h\in\mathfrak{h}\right\} .
+\end{align*}
+The root lattice is contained in the weight lattice $Q\subset P$
+because $\left\langle \alpha^{\vee},\beta\right\rangle \in\mathbb{Z}$.
+(They may coincide.) A weight $\lambda$ is {\bf dominant integral} if
+\begin{align*}
+\langle \lambda,\alpha^{\vee} \rangle \in \mathbb{Z}_+, \forall \alpha \in R_+.
+\end{align*}
+The {\bf highest weight theorem} then guarantees that each and every dominant integral weight $\lambda$ gives distinct finite dimensional irreps of $\mathfrak{g}$ with the highest weight $\lambda$ and every finite dimensional irrep of $\mathfrak{g}$ arises in this way. A weight is a $\text{rank} \mathfrak{g}$-tuple, so one needs a partial ordering of weights when $\text{rank} \mathfrak{g}>1$ to identify the highest weight.
+
+Weights are also related to the logarithm of the characters of a representation of $G$ restricted to a maximal torus.
+
+\item \label{angular momentum} Let us look at a rank-1 example ($\text{rank}\mathfrak{su}(n) = n-1 $): $\mathfrak{su}(2)$. For concreteness, also let us work in a specific representation.
+\begin{align*}
+X & =\left(\begin{array}{cc}
+0 & 1\\
+1 & 0
+\end{array}\right),&
+Y & =\left(\begin{array}{cc}
+0 & -i\\
+i & 0
+\end{array}\right),&
+Z & =\left(\begin{array}{cc}
+1 & 0\\
+0 & -1
+\end{array}\right).
+\end{align*}
+The Lie algebra $\mathfrak{su}(2)$ of $SU(2)$ is a \emph{real} vector space whose basis can be chosen to be
+is $\{ iX,iY,iZ \}$,
+\begin{align}
+[iX,iY] &= -2iZ,&
+[iY,iZ] &= -2iX,&
+[iZ,iX] &= -2iY.
+\end{align}
+The Lie algebra of $\mathfrak{so}(3,\mathbb{R})$ is
+\begin{align*}
+J_x & =\left(\begin{array}{ccc}
+0 & 0 & 0\\
+0 & 0 & -1\\
+0 & 1 & 0
+\end{array}\right),&
+J_y & =\left(\begin{array}{ccc}
+0 & 0 & 1\\
+0 & 0 & 0\\
+-1 & 0 & 0
+\end{array}\right),&
+J_z & =\left(\begin{array}{ccc}
+0 & -1 & 0\\
+1 & 0 & 0\\
+0 & 0 & 0
+\end{array}\right),
+\end{align*}
+\begin{align}
+\left[J_x,J_y\right] & =J_z,&
+\left[J_y,J_z\right] & =J_x,&
+\left[J_z,J_x\right] & =J_y.
+\end{align}
+These two can be identified via the isomorphism $iX \to -2J_x$, etc. that lifts to a homomorphism between the groups. Physicists' commutation relations of $\mathfrak{su}(2)$ are in fact those of $\mathfrak{su}(2)_{\mathbb{C}}$, the complexified $\mathfrak{su}(2)$.
+\begin{align}
+\left[X,Y\right] & =2iZ,&
+\left[Y,Z\right] & =2iX,&
+\left[Z,X\right] & =2iY,
+\end{align}
+No two of them can be simultaneously diagonalized, so we pick one of
+them, say $Z$, to be a basis of the one-dimensional Cartan subalgebra.
+The complexification allows us to use the {\bf Chevalley} or {\bf Cartan basis} which incorporates the raising and lowering operators:
+\begin{align*}
+H & =Z,&
+E & =\frac{X+iY}{2} = \left(\begin{array}{cc}
+0 & 1\\
+0 & 0
+\end{array}\right),&
+F & =\frac{X-iY}{2} = \left(\begin{array}{cc}
+0 & 0\\
+1 & 0
+\end{array}\right),
+\end{align*}
+\begin{align*}
+\left[H,E\right] & =2E,&
+\left[H,F\right] & =-2F,&
+\left[E,F\right] & =H.
+\end{align*}
+isomorphic to $\mathfrak{sl}(2,k)$. When $k=\mathbb{C}$, it is the lowest-dimensional complex semisimple Lie algebra. (In dimensions one and two, we get either an abelian Lie algebra or $gl(2,\mathbb{C})$ which is reductive (\ref{Levi}) but not semisimple.) For finite dimensional representations, representations of $\mathfrak{sl}(2,\mathbb{C})$ corresponds to unitary representations of $su(2)_{\mathbb{C}}$ and hence its real form $\mathfrak{su}(2)=\mathfrak{so}(3,\mathbb{R})$. $SL(2,\mathbb{C})$ is not compact, so it does not have any finite-dimensional unitary irrep and the correspondence is more complicated, but we will not need it in any way.
+
+We know from quantum mechanics that these commutation relations completely determine all $n+1$-dimensional irreps $V_n$ of $SU(2)$, each with the highest weight $n$. $V_n$ splits into the direct sum of all one-dimensional weight spaces
+\begin{align*}
+V_n &= \bigoplus_k V_k,\\
+EV_k &\subset V_{k+2},\\
+FV_k &\subset V_{k-2},
+\end{align*}
+and $V_n$ can be constructed by applying the lowering operator $F$ to the highest weight vector $ \ket{n,k} \subset V_k$:
+\begin{align*}
+E\ket{n,k} &= 0.
+\end{align*}
+(A potential point of confusion: some math books define $\ket{n,k}$ to be $k$ steps \emph{below} the highest weight vector i.e. $F^k\ket{j,j}$.)
+Irreps can be projected out of a representation as eigenspaces of the {\bf Casimir operator}. Given an orthonormal operator basis $\{|E_{\alpha}) \}$ of $\mathfrak{g}$, the (quadratic) Casimir operator is the identity operator
+\begin{align*}
+\sum_{\alpha} |E_{\alpha})(E_{\alpha}|,
+\end{align*}
+where
+\begin{align*}
+(E_{\alpha}|=|E_{\alpha})^{\dagger}
+\end{align*}
+For $\mathfrak{sl}(2,\mathbb{C})$, it is
+\begin{align*}
+X^2+Y^2+Z^2 &= H^2 + EF + FE.
+\end{align*}
+Note that the Casimir operator does not lie in the Lie algebra since only the Lie bracket is defined there. (It lies in the {\bf universal enveloping algebra}.)
+
+The two- and three-dimensional representations above are $V_1$ and $V_2$ with weights -1,1 and -2,0,2 respectively. $V_1$ is a natural representation of the Lie algebra of $SU(2)$. $V_2$ is the adjoint representation and the natural representation of the Lie algebra of $SO(3,\mathbb{R})$. The simple root 2 generates the root lattice isomorphic to even integers $2\mathbb{Z}$ strictly contained in the weight lattice $\mathbb{Z}$. Representations with the highest weights outside the root lattice are (projective) {\bf spin} or {\bf spinor representations} of $SO(3,\mathbb{R})$.
+
+\end{enumerate}
+
+\section{Compact and Semisimple Lie Groups}
+
+Fundamental groups, homotopy groups...
+
+Non-connected, non-simply connected semisimple Lie groups, maximal compact subgroups, QR decomposition, Gram-Schmidt process as deformation retraction to a maximal compact subgroup, Iwasawa decomposition as a generalized QR decomposition,...
+
+Real forms, compact real form of classical Lie groups, the Lorentz group SO(1,3), conformal groups for $p+q>2$...
+
+Measure and Riemannian metric on compact groups, symmetric spaces...
+
+Hilgert and Neeb could be a really good reference for this section.
+
+\begin{thebibliography}{99}
+
+\bibitem{KirillovJr08}
+Alexander Kirillov Jr., \emph{An Introduction to Lie Groups and Lie Algebras}, Cambridge University Press, 2008.
+
+\bibitem{Hall03}
+Brian C. Hall, \emph{Lie Groups, Lie Algebras, and Representations: An Elementary Introduction}, Springer, 2003.
+
+%\bibitem{Procesi07}
+%Claudio Procesi, \emph{Lie Groups: An Approach through Invariants and Representations}, Springer, 2007.
+
+%\bibitem{Knapp02}
+%Anthony W. Knapp, \emph{Lie Groups Beyond an Introduction}, 2nd ed., Birkh{\"a}user, 2002.
+
+\bibitem{Lee12}
+John M. Lee, \emph{Introduction to Smooth Manifolds}, 2nd ed., Springer, 2012.
+
+\bibitem{FH91}
+William Fulton and Joe Harris, \emph{Representation Theory: A First Course}, Springer, 1991.
+
+%\bibitem{Brif98}
+%C. Brif and A. Mann, \emph{Phase-space formulation of quantum mechanics and quantum state reconstruction for physical systems with Lie-group symmetries}, \href{http://dx.doi.org/10.1103/PhysRevA.59.971}{Physical Review A {\bf 59} 971 (1998).}
+
+%\bibitem{Kerr96}
+%Megan Kerr, \emph{Some new homogeneous Einstein metrics on symmetric spaces}, \href{http://www.ams.org/journals/tran/1996-348-01/S0002-9947-96-01512-7/S0002-9947-96-01512-7.pdf}{Transactions of the American Mathematical Society {\bf 348} 153 (1996).}
+
+%\bibitem{Geiges08}
+%Hansj{\"o}rg Geiges, \emph{An Introduction to Contact Topology}, Cambridge University Press (2008).
+
+%\bibitem{Barut86}
+%A. O. Barut and R. Raczka, \emph{Theory of Group Representations and Applications}, 2nd ed., World Scientific, Singapore (1986).
+
+%\bibitem{Oeckl15}
+%Robert Oeckl, \emph{Coherent states in the fermionic Fock space}, \href{http://dx.doi.org/10.1088/1751-8113/48/3/035203}{Journal of Physics A: Mathematical and Theoretical {\bf 48} 035203 (2015).}
+
+\end{thebibliography}
+
+\end{document}

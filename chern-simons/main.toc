@@ -1,0 +1,16 @@
+\tocdepth@munge 
+\contentsline {section}{\numberline {}Contents}{1}{section*.1}
+\tocdepth@restore 
+\contentsline {section}{\numberline {}Introduction}{1}{section*.2}
+\contentsline {section}{\numberline {I}Geometry of gauge theories}{1}{section*.3}
+\contentsline {subsection}{\numberline {A}Manifolds and tangent spaces}{2}{section*.4}
+\contentsline {subsection}{\numberline {B}Vector bundles}{2}{section*.5}
+\contentsline {subsection}{\numberline {C}Connections and gauge fields}{4}{section*.6}
+\contentsline {subsection}{\numberline {D}Differential forms}{5}{section*.7}
+\contentsline {section}{\numberline {II}Chern-Simons theories}{8}{section*.8}
+\contentsline {subsection}{\numberline {A}Wilson loops}{9}{section*.9}
+\contentsline {subsection}{\numberline {B}Example: Fractional statistics}{10}{section*.10}
+\contentsline {subsection}{\numberline {C}Example: Topological degeneracy}{12}{section*.11}
+\contentsline {section}{\numberline {}References}{12}{section*.12}
+\appendix 
+\contentsline {section}{\numberline {A}Exterior derivatives in 3 dimensions}{13}{section*.13}

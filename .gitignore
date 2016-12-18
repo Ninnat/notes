@@ -1,3 +1,9 @@
+# Latex
+*.aux
+*.log
+*.out
+*.gz
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
