@@ -413,7 +413,7 @@ or more compactly,
 \begin{align}
 u(t) = Pe^{\int d\gamma \cdot A(t)} u(0).
 \end{align}
-So $Pe^{\int d\gamma \cdot A(t)}$ is the holonomy. (Recall that $A$ takes value in the Lie algebra of $G$, so the holonomy is indeed the group element.)
+$Pe^{\int d\gamma \cdot A(t)}$ is the holonomy. (Recall that $A$ takes value in the Lie algebra of $G$, so the holonomy is indeed the group element.)
 
 
 Suppose that $u(t)$ is the solution to \eqref{parallel transport eq} above. Under a local gauge transformation $g(\gamma(t))$,
@@ -447,7 +447,7 @@ Crucially, it is gauge invariant because the trace is invariant under conjugatio
 \subsection{Example: Fractional statistics}
 %-------------------
 
-So far our discussion has mostly been about the \emph{classical} Chern-Simons theories. As with other gauge theories, the quantization of the Chern-Simons theories is done in the path integral formulation, which is outside the scope of this article. What is more, there is some subtlety in the calculation of the Wilson loop. So we will have to accept a few facts in order to move forward.
+So far our discussion has mostly been about \emph{classical} Chern-Simons theories. As with other gauge theories, the quantization of the Chern-Simons theories is done in the path integral formulation, which is outside the scope of this article. What is more, there is some subtlety in the calculation of the Wilson loop. So we will have to accept a few facts in order to move forward.
 
 For simplicity, we will consider $U(1)$ quantum Chern-Simons theories. In this case, the Chern-Simons form reduces to
 \begin{align}
@@ -463,7 +463,7 @@ The vacuum expected value of a Wilson loop can be expressed in the path integral
 	&= \frac{ \bra{0} W(\gamma) \ket{0} }{ \braket{0|0} }
 	= \frac{\int DA W(\gamma,A) \exp \left( i\int_M A \wedge dA \right)}{\int DA \exp \left( i\int_M A \wedge dA \right)}, 
 \end{align}
-where $\ket{0}$ is the vacuum state and $DA$ is the "measure" over the space of gauge fields. The amazing mathematical fact is that this is proportional to a link invariant, the {\bf linking number} $L$ \cite{Pachos12}, when $\gamma$ is now allowed to be a collection of loops:
+where $\ket{0}$ is the vacuum state and $DA$ is the "measure" over the space of gauge fields. The amazing mathematical fact is that this depends solely on a link invariant, the {\bf linking number} $L$ \cite{Pachos12}, when $\gamma$ is now allowed to be a collection of loops:
 \begin{align}\label{link formula}
 \langle W (\gamma) \rangle = \exp \left[ \frac{i \pi}{k} \sum_{j,l} q_j q_l L(\gamma_j,\gamma_l) \right],
 \end{align}
