@@ -1,0 +1,295 @@
+\section{Linear Algebra}\label{sec:A01}
+
+%---------------------------------------------
+\subsection{Vector space, basis, and dimensionality}
+%---------------------------------------------
+
+To define vector space axiomatically, it is convenient to define an abelian group first.
+
+\begin{definition}
+	A {\bf group} $G$ is a set closed under an associative binary operation $\cdot$ (\emph{group multiplication}) satisfying the following properties.
+	\begin{enumerate}
+		\item There exists an {\bf identity} element $e$ such that $e\cdot g = g\cdot e = g$ for every element $g\in G$.
+		\item For every $g\in G$, there exists an {\bf inverse} denoted by $g^{-1}$ such that $g\cdot g^{-1} = g^{-1}\cdot g = e$. 
+	\end{enumerate}
+\end{definition}
+\noindent We often omit the symbol $\cdot$ and simply write a product $g\cdot h$ as $gh$.
+A group in which the order of multiplication doesn't matter ($gh=hg$) is called a {\bf commutative} group or an {\bf abelian} group.
+\begin{example}
+	$(\Z,+)$ (The group of integers with addition as group multiplication) is an abelian group with 0 as the identity and $-a$ as the inverse of $a$.
+\end{example}
+%\begin{example}
+%	$(\Z_+,+)$ (The group of non-negative integers) is {\bf not} a group, since any nonzero element has no inverse.
+%\end{example}
+\begin{example}
+	$(\Z,-)$ (The group of integer with subtraction as group multiplication) is {\bf not} a group, since subtraction is not associative ($a-(b-c) \neq (a-b)-c$).
+\end{example}
+{\color{red}
+\begin{example}
+	$(\C/\{0\},\times)$ (The group of complex numbers excluding zero with multiplication) is an abelian group with 1 as the identity and $1/a$ as the inverse of $a$.
+\end{example}
+}
+\begin{example}
+	$(\{\pm 1,\pm i\},\times)$ is an abelian group with 1 as the identity. $-1$ is its own inverse, and $\pm i$ is an inverse of each other.
+\end{example}
+\begin{example}
+	$(\mathrm{GL}(n),\times)$ (The group of invertible matrices with matrix multiplication) is a non-abelian group with the identity matrix $\id$ as the identity and the matrix inverse $A^{-1}$ as the inverse.
+\end{example}
+\begin{example}[\bf Quantum information example]\leavevmode
+	\noindent $(\{\pm \id, \pm iX, \pm iY, \pm iZ\},\times)$, where
+	\begin{align}\label{def:pauli}
+		X=\mqty(0&1\\ 1&0), && Y=\mqty(0&-i\\ i&0), &&Z=\mqty(1&0\\0&-1)
+	\end{align}
+	are \emph{Pauli matrices}, forms a non-abelian group with $\id$ as the identity and $\pm iX$ is an inverse of each other, for example.
+\end{example}
+
+Armed with the definition of an abelian group, we now proceed to define a vector space over the number field $K=\R$ (reals) or $\C$ (complex numbers).
+\begin{definition}
+	A {\bf vector space} $V$ over $K$ is a set closed under the following  operations.
+	\begin{enumerate}
+		\item {\bf Vector addition:} $u+v$, where $u,v\in V$,
+		\item {\bf Scalar multiplication:} $a u$, where $a\in K$ and $u\in V$,
+	\end{enumerate}	 
+	such that $(V,+)$ is an abelian group, and 
+	\begin{align}
+		1u &= u, \\
+		a(u+v) &= a u + a v, \\
+		(a +b) u &= a u + b u, \\
+		(ab) u &= a(b u),	
+	\end{align}
+	where $u,v\in V$ and $a,b\in K$
+\end{definition}
+
+The three-dimensional Euclidean space $\R^3$ is a prototypical example of a vector space over $\R$. As a set, $\R^3$ contains infinitely many vectors, but a finite representative set $\{\bf \hat{x},\hat{y},\hat{z}\}$, called a \emph{basis}, is sufficient to represent any vector in $\R^3$. To define a basis, we first define the notion of a span.
+
+\begin{definition}
+	Given a set $S=\{u_1,u_2,\dots,u_n\} \subset V$ of a finite number of vectors, $\mathrm{span}\,S$ is the set of all linear combination (L.C.) of these vectors
+	\begin{align}
+		a_1u_1 + a_2u_2 + \cdots + a_nu_n, && \forall a_j \in K.
+	\end{align} 
+\end{definition}
+
+\noindent A vector space $V$ is said to be {\bf finite dimensional} if it is spanned by some finite set of vectors in $V$. Otherwise, it is {\bf infinite dimensional}.
+
+\begin{definition}
+	A set $S=\{u_1,u_2,\dots,u_n\} \subset V$ is {\bf linearly independent (L.I.)} if the equation
+	\begin{align}
+		a_1u_1 + a_2u_2 + \cdots + a_nu_n = 0
+	\end{align}
+	implies that $a_j = 0$ for all $j=1,\dots,n$. 
+\end{definition}
+\noindent In other words, linear independence means that no vector in $S$ can be written as a non-trivial L.C. of other vectors in $S$. Otherwise, if $a_1\neq 0$, for instance, then
+\begin{align}
+	u_1 = -(a_2 u_2 + \cdots + a_n u_n)/a_1.
+\end{align}
+
+%\begin{definition}
+%	$S \subseteq V$ {\bf spans} $V$ if every vector in $V$ can be written as a linear combination of vectors in $S$.
+%\end{definition}
+
+\begin{definition}
+	$S\subset V$ is a {\bf basis} for $V$ if it is L.I. and spans $V$.
+\end{definition}
+\noindent The size of $S$ is an invariant of a vector space called the {\bf dimension}, denoted by $\dim V$. The dimension is the minimum numbers of vectors that spans $V$. For any nontrivial (not $\{0\}$) vector space, there are infinitely many choices of bases.
+
+\begin{example}
+	The field $K$ itself is a one-dimensional vector space over $K$.	
+\end{example}
+\begin{example}
+	$K^n$ is an $n$-dimensional vector space over $K$, with the standard basis $\{u_j\}_{j=1,\dots,n}$, where $u_j$ is a vector with 1 at the $j$th entry and 0 elsewhere. 
+	
+	\noindent In the two-dimensional case, the followings are equivalent fot a set $S = \{(a_1,a_2), (b_1,b_2)\}$.
+	\begin{itemize}
+		\item $S$ is L.I.
+		\item $S$ spans $K^2$.
+		\item The determinant $\mqty|a_1&b_1\\a_2&b_2|=a_1b_2 - a_2b_1 \neq 0$.
+	\end{itemize}
+\end{example}
+\begin{example}
+	The set of $n\times m$ $K$-valued matrices is an $n\times m$-dimensional vector space with the basis $\{E_{jk}\}_{j=1,\dots,n}^{k=1,\dots,m}$, where $E_{jk}$ is a matrix with 1 at the $jk$th entry and 0 elsewhere. 
+\end{example}
+%\begin{example}[\bf Quantum computing example]
+%	The complex span of $\{\id,X,Y,Z\}$ where $X,Y,Z$ are the Pauli matrices \eqref{def:pauli}. coincides with the set of all complex $2\times 2$ matrices, while the real span of $\{\id,X,Y,Z\}$ coincides with the set of all Hermitian $2\times 2$ matrices.
+%\end{example}
+\begin{example}
+	Polynomials over an indeterminate $x$ form an infinite-dimensional vector space. Restricting to $n$-degree polynomials gives an $(n+1)$-dimensional vector space with a basis $\{1,x,x^2,\dots,x^n\}$.
+\end{example}
+\begin{example}
+	The set of solutions of a linear, $k$th-order differential equation, for example, $$f''+f'+f=0$$ for $k=2$, forms a vector space of dimension $k$.
+\end{example}
+
+By choosing a basis, every vector in a finite-dimensional vector space can be specified by its {\bf components} $v_j$ defined as.
+\begin{align}
+	v = \sum_j v_j u_j,
+\end{align}
+which is typically stacked into a column vector
+\begin{align}
+	v \leftrightarrow \mqty(v_1 \\ v_2 \\ \vdots \\ v_n).
+\end{align}
+The arrow $\leftrightarrow$ is there to remind us that the components constitute only a \emph{representation} of the vector. The vector itself is a geometric object (visualized as an arrow, for example) that exists independent of the choice of basis, whereas the components change when we perform a \emph{change of basis}. (More on that later.)
+
+A subset $S \subset V$ of a vector space that is also a vector space is called a {\bf subspace}.
+A vector space $U$ is said to be a {\bf direct sum} $V\oplus W$ if every $u\in U$ can be decomposed uniquely as a sum of $v\in V$ and $w\in W$.
+Equivalently, any $u\in U$ can be specified by a unique pair $(v,w)\in V\times W$ such that\mn{Hence for vector spaces, the direct sum and the direct product are the same. Compare properties \ref{direct-sum-add} and \ref{direct-sum-scalar} to the algebraic rules for the tensor product.}
+\begin{align}
+	(v_1,w_1) + (v_2,w_2) &= (v_1+v_2,w_1+w_2), \label{direct-sum-add}\\
+	a(v,w) &= (av,aw). \label{direct-sum-scalar}
+\end{align}
+
+
+%---------------------------------------------
+\subsection{Linear maps}
+%---------------------------------------------
+
+Morphisms that preserve the structure of vector spaces are linear maps.
+\begin{definition}
+	Given a map $T:U\to V$,
+	$T$ is said to be a {\bf linear map} if
+	\begin{align}
+		T(au + bv) = aT(u) + bT(v).
+	\end{align}
+\end{definition}
+
+\noindent For now, we will focus on linear maps between the same input and output vector space, in which case linear maps are also called {\bf linear operator}, or just operators in short. Just keep in mind that linear maps between different vector spaces are no less important. For instance, we will see in a moment that a bra $\bra{u}$ is a linear map from a vector space over a field $K$ to $K$ itself, a one-dimensional vector space. 
+
+\begin{example}
+	Left shift
+	\begin{align}
+		(c_1,c_2,c_3,\dots) \mapsto (c_2,c_3,c_4,\dots),\label{eq:left-shift}
+	\end{align}
+	and right shift
+	\begin{align}
+		(c_1,c_2,c_3,\dots) \mapsto (0,c_1,c_2,\dots),\label{eq:right-shift}
+	\end{align}
+	are linear operators in an infinite-dimensional vector space.
+\end{example}
+
+\begin{example}
+	Differentiation
+	\begin{align}
+		\dv{x}(af+bg) = a\dv{f}{x} + b\dv{g}{x}
+	\end{align}
+	is a linear operator in the space of differentiable functions.
+\end{example}
+
+\begin{example}
+	The trace $\tr(\hat A) = \sum_j \expval{\hat A}{e_j}$ is a linear map from the vector space of $L(\hilb)$ of linear operators over $\hilb$ to $\C$.
+\end{example}
+\begin{comment}
+\begin{example}[\bf Quantum information example]\leavevmode
+	The partial trace 
+	\begin{align}
+		\tr_B: L(\hilb_A) \otimes L(\hilb_B)&\mapsto L(\hilb_A) \\
+		\tr_B(\op\rho_{AB}) &= \sum_j {}_B\expval{\op \rho_{AB}}{e_j}_B
+	\end{align}
+\end{example}
+\end{comment}
+
+As vectors can be specified by their components, so too can linear operators by their ``matrix elements".
+Pick a basis $\{u_1,u_2,\dots,u_n\}$ for $U$. $T(u_j)$ is another vector in $U$, and hence can be expanded using the same basis. The {\bf matrix element} $T_{jk}$ is defined as
+\begin{align}
+	T(u_j) = \sum_{k=1}^n  T_{jk} u_k,
+\end{align}
+where $j$ is the row index and $k$ is the column index.
+\begin{align}
+	T \leftrightarrow \mqty(T_{11}&T_{12}& \dots & & T_{1n} \\ T_{21}& T_{22} & & & \vdots \\ \vdots & & \ddots & & \\ T_{n1} & \dots & & & T_{nn}) 
+\end{align}
+
+\begin{comment}
+There are two important subspaces associated to a linear map $\op T:U\mapsto V$. 
+The {\bf kernel} of $\op T$ is the set of vectors in $U$ that are mapped to the zero vector in $V$. The {\bf image} of $\op T$ is the set of vectors in $V$ that can be written as $T(u)$ for some $u\in U$.
+
+\begin{definition}[\bf Kernel and image]\leavevmode
+	\begin{align}
+		\ker \op T &= \{u\in U|\op T(u) = 0\} \\
+		\textrm{Im} \op T &= \{v\in V|\op T(u)=v\}
+	\end{align}
+\end{definition}
+
+The kernel and the image are subspaces of $U$ and $V$ respectively. (Prove this.) Furthermore, even though they are subspaces of different vector spaces, we have the follow theorem, which we do not prove here.
+
+\begin{theorem}[\bf Rank-nullity]\leavevmode
+	\begin{align}
+		\dim \ker \op T + \dim \textrm{Im} \op T = \dim U
+	\end{align}
+\end{theorem}
+
+One can see that a linear map is invertible iff the kernel is trivial, $\ker \op T = \{0\}$.
+
+
+$$[AB,CD] = [A,C]BD + A[B,C]D+ C[A,D]B + CA[B,D]$$
+\end{comment}
+
+
+%---------------------------------------------
+\subsection{Eigenvalues and eigenvectors}
+%--------------------------------------------
+
+From this point onward, suppose that $\op T: U\to U$ maps a vector space to the same space. That is, $\op T$ is a linear operator.
+The equation of the form
+\begin{align}
+	\op T\ket{u} = \lambda \ket{u}
+\end{align}
+is called an \emph{eigenvalue equation}. The scalar $\lambda$ is called an {\bf eigenvalue} of the linear operator $\op T$, and $\ket{u}$ is called an {\bf eigenvector} of $\op T$. It is straightforward to show that eigenvectors corresponding to the same eigenvalue form a subspace called an {\bf eigenspace}.
+
+Not all linear operators possess an eigenvalue. Take rotations in $\R^2$, for example,
+\begin{align}
+	\mqty(\cos\theta & -\sin\theta \\ \sin\theta & \cos\theta)\mqty(x \\ y).
+\end{align}
+No vector with real coefficients remain fixed under a rotation by an arbitrary angle. However, if one allows for complex linear combinations, ${\bf \hat{x}}\pm i{\bf \hat{y}}$ are eigenvectors of the rotations. In fact, this example highlights a broader phenomenon when we work in an algebraically closed field.
+
+%Recall that the determinant $\det \op T=0$ iff $\op T$ is not invertible. Therefore,
+
+\begin{theorem}\label{thm:eigenvalue-exists}
+	In an algebraically closed field such as $\C$, every linear operator always possess at least one eigenvalue (and eigenvector).
+\end{theorem}
+\noindent The followings is a determinant  theorem can be proved without using the determinant as follows \cite{axler}.
+\begin{proof}
+	In an $n$-dimensional vector space $V$,
+	pick any nonzero vector $\ket{v}\in V$ and consider the set $\{\ket{v},\op T\ket{v},\op T^2 \ket{v},\dots,T^n \ket{v}\}$. Since the cardinality of the set is $n+1$, the set must be linearly \emph{dependent}. There exist $c_0,c_1,\cdots,c_n$, not all of them zero, such that
+	\begin{align}
+		0 &= (c_o\op\id + c_1\op T + \cdots + c_n\op T^n)\ket{v} \\
+		&= \alpha \prod_{k=1}^d (\op T-\lambda_k \op\id) \ket{v},
+	\end{align}
+	where in the second line we have used the fact that every polynomial can be factorized into linear factors over $\C$:
+	\begin{align}
+		c_0 + c_1z + c_2z^2 +\dots+c_nz^2 = \alpha \prod_{k=1}^n(z-\lambda_k).
+	\end{align}
+	Thus, some $\op T -\lambda_k\op\id$ must be the zero operator, and the input of such linear factor is an eigenvector of $\op T$.
+\end{proof}
+
+%---------------------------------------------
+%\subsection{Singular value decomposition}
+%-------------------------------------------
+
+%---------------------------------------------
+\subsection{Proof of the spectral theorem for normal operators}\label{sec:spectral-proof}
+%--------------------------------------------
+
+The key property for a linear operator $\op T$ to be diagonalizable is that, if $S \subset V$ is an $T$-invariant subspace, then the orthogonal complement $S^{\perp}$ is also $T$-invariant. You might sort of already see how this is sufficient for diagonalization, because if $\ket{v}$ is a eigenvector $\op T$ (at least one of which always exist because of Theorem \ref{thm:eigenvalue-exists}), then one can cut down $V$ to a smaller subspace $S^{\perp}$ orthogonal to $\ket{v}$. But if $S^{\perp}$ is also $T$-invariant, then one can again find at least one eigenvector in $S^{\perp}$. This process can then be repeated until we find all the eigenvectors of $\op T$ which form an ONB for $V$.
+
+Let $\op P$ be a projection operator onto $S$ respectively. Then
+\begin{align}
+	\parbox{8em}{$S$ is $T$-invariant} &\iff (\op\id - \op P) \op T \op P = 0, \label{eq:S-invariant} \\
+	\parbox{8em}{$S^{\perp}$ is $T$-invariant} &\iff \op P \op T (\op\id - \op P)  = 0. \label{eq:S-perp-invariant}
+\end{align}
+The goal is to show that \eqref{eq:S-invariant} implies \eqref{eq:S-perp-invariant} if and only if $\op T$ is normal. In particular, \eqref{eq:S-perp-invariant}
+ is the statement that $\op X\equiv  \op P \op T (\op\id-\op P) $ is unequivocally the zero operator, which we is equivalent to the vanishing of the Hilbert-Schmidt norm
+ \begin{align}
+ 	\norm{\op X}^2 = \tr(\op X\dgg \op X) = 0.
+ \end{align}
+ 
+\begin{align}
+	\tr(\op X\dgg \op X) &= \tr[(\op\id - P)\op T\dgg \op P \op P \op T(\op\id -\op P)] \\
+	&= \tr[(\op\id -\op P)^2 \op T\dgg \op P^2 \op T] \mnf{Cyclicity of the trace} \\
+	&= \tr[(\op\id -\op P) \op T\dgg \op P \op T] \mnf{Property of projection operators} \\
+	&= \tr\left(\smash{\op T\op T\dgg \op P - \op T\dgg \underbrace{\op P \op T \op P}_{\mathclap{\op T \op P \textrm{\:by \eqref{eq:S-invariant}}}}}\right) \\[1em]
+	&= \tr[(\op T\op T\dgg - \op T\dgg\op T)\op P].
+\end{align}
+The last line vanishes if $\op T$ is normal, thus concluding the proof.
+
+The \href{https://en.wikipedia.org/wiki/Singular_value_decomposition (SVD)}{singular value decomposition} makes it obvious the significance of the condition $\op T\op T\dgg = \op T\dgg \op T$. For an arbitrary matrix $\op T$ (may be non-square), the SVD implies that
+\begin{align}
+	\op T = \sum_{j} \sigma_j \dyad{e_j}{f_j},
+\end{align}
+where the two orthonormal sets $\{\ket{e_j}\}_j$ and $\{\ket{f_k}\}_k$ are eigenvectors of $\op T\dgg \op T$ and $\op T \op T\dgg$, respectively, and $\sigma_j$ are non-negative \emph{singular values}. It is clear then, that the equality $\op T\op T\dgg = \op T\dgg\op T$ implies that the two orthonormal sets are the same i.e. it is the basis in which the matrix of $\op T$ is diagonal.

@@ -1,0 +1,184 @@
+\documentclass[11pt,english]{article}
+\usepackage{NotesTeX}
+\usepackage{mathpazo}
+
+\usepackage{amsmath,amsthm,amssymb,bbm,mathtools,physics}
+%\usepackage{braket}
+\usepackage{graphicx}
+\graphicspath{ {fig/} }
+\usepackage[all]{xy}
+\usepackage{tikz}
+\usepackage{array}
+\usepackage{dashrule}
+\usepackage{changepage}
+%\usepackage{floatrow}
+\usepackage{epigraph} % inspirational quotes
+\usepackage{cancel}
+\usepackage{tcolorbox}
+\usepackage{multirow}
+\usepackage{empheq}
+\usepackage{comment}
+\usepackage{arydshln}
+
+\usepackage{xcolor}
+%\usepackage[breaklinks=true]{hyperref}
+%\hypersetup{
+	%  colorlinks   = true, %Colours links instead of ugly boxes
+	%  urlcolor     = blue, %Colour for external hyperlinks
+	%  linkcolor    = blue, %Colour of internal links
+	%  citecolor   = magenta %Colour of citations
+	%}
+\definecolor{darkmagenta}{rgb}{0.55, 0.0, 0.55}
+\definecolor{maincolor}{rgb}{0.8, 0.33, 0.0} % burnt orange แสด มน.
+\definecolor{eqcolor}{rgb}{0.0, 0.447, 0.737} % french blue
+
+\newcommand*{\eqbox}{%
+	\tcboxmath[colback=eqcolor!10!white, colframe=eqcolor!95!black, size=fbox, arc=3pt, boxrule=0.8pt]%
+}
+%\definecolor{mycolor}{rgb}{0.0, 0.29, 0.29}
+\newtcolorbox{mybox}[1][]{colback=eqcolor!10!white, colframe=eqcolor!95!black, title=#1}
+
+\newcommand\tikzmark[1]{\tikz[remember picture,overlay]\coordinate (#1);}
+
+	
+\makeatletter
+
+%\newcommand{\ketbra}[2]{\ket{#1}\bra{#2}}
+\newcommand\dgg{^{\dagger}}
+%\newcommand\Tr{\mathrm{Tr}}
+\newcommand\id{\mathbbm{1}}
+\newcommand\Id{\hat\mathbf{I}}
+\newcommand\hilb{\mathcal{H}}
+%\newcommand\abs[1]{\left|#1\right|}
+\newcommand\av[1]{\left\langle #1 \right\rangle}
+\newcommand\conj[1]{#1^*}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\E}{\mathbb E}
+
+\renewcommand\op[1]{\widehat{#1}} % op in physics package is ketbra/dyad 
+\newcommand\vecop[1]{\widehat{\boldsymbol{#1}}}
+\newcommand\unc[1]{\hat #1_{\Delta}}
+\newcommand\wunc[1]{\widehat #1_{\Delta}} 
+% widehat for commonly used operators
+\newcommand\bigzero{\makebox(0,0){\text{\huge0}}}
+\renewcommand\H{\widehat H}
+\newcommand\U{\widehat U}
+\newcommand{\unit}[1]{\hat{\boldsymbol{#1}}}
+
+\definecolor{strcyan}{RGB}{33,140,141}
+\newcommand\todo[1]{{\color{strcyan} #1}}
+
+%\@addtoreset{section}{part}
+% equation numbering by chapters, not sections
+%\numberwithin{equation}{part}
+%\renewcommand{\theequation}{\arabic{part}.\arabic{equation}} 
+
+%\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+%\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+%\newtheorem{example}{Example}[section]% Example
+\newcommand\mnf[1]{\marginnote{\footnotesize{#1}}}
+
+\usepackage{pifont}
+\newcommand{\xmark}{\text{\ding{55}}}
+\newcommand\dashing{\noindent\vspace{-1ex}\makebox[\linewidth][r]{\hdashrule[1ex][x]{\textwidth}{0.4pt}{1pt 2pt}}}
+%-----------------
+\newcommand\red[1]{{\color{red} #1}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\newcommand{\lyxaddress}[1]{
+	\par {\raggedright #1
+		\vspace{1.4em}
+		\noindent\par}
+}
+
+
+\makeatother
+
+	\title{{Quantum Information}\\{\normalsize{\itshape }}}
+	
+	\author{Ninnat Dangniam}
+	\affiliation{
+		Institute for Fundamental Study (IF) \\
+		Naresuan University,
+		Phitsanulok, \\ Thailand 65000}
+	\emailAdd{ninnatd@nu.ac.th}	
+	
+\begin{document}	
+	
+\maketitle
+
+\include{chapters/01_entropy}
+
+\newpage
+
+\include{chapters/02_math}	
+
+\newpage
+
+\include{chapters/03_quantum}	
+
+\newpage
+
+\include{chapters/04_nonlocal}	
+	
+\newpage
+
+\appendix
+
+\include{chapters/A01_linear_algebra}
+
+\newpage
+\begin{thebibliography}{99}
+	
+\begin{comment}
+\bibitem{feynman-lectures}
+Richard Feynman, Robert Leighton, and Matthew Sands, \emph{The Feynman Lectures on Physics}, Vol. 3, Addison-Wesley, Reading, Mass. (1965).
+	
+\bibitem{renes-book}
+Joseph Renes, \emph{Quantum Information Theory: Concepts and Methods}, De Gruyter Oldenbourg (2022).
+
+\bibitem{catani2021}
+Lorenzo Catani, Matthew Leifer, David Schmid, and Robert Spekkens, \emph{Why interference phenomena do not capture the essence of quantum theory}, \href{https://arxiv.org/abs/2111.13727}{arXiv:2111.13727}
+\end{comment}
+
+\bibitem{landsman}
+N. P. Landsman, \href{https://www.math.ru.nl/~landsman/HSQM2006.pdf}{\emph{Lecture notes on Hilbert spaces and quantum mechanics}}
+
+\bibitem{jammer}
+Max Jammer, \emph{The Conceptual Development of Quantum Mechanics}, 2nd ed., %The History of Modern Physics, 1800-1950, Vol. 12, 
+Tomash Publishers, American Institute of Physics (1989).
+
+\bibitem{coecke2009}
+Bob Coecke, \emph{Quantum picturalism}, \href{https://doi.org/10.1080/00107510903257624}{Contemporary Physics 51 59–83 (2009)}.
+
+\bibitem{bell-nonlocality-review}
+Nicolas Brunner, Daniel Cavalcanti, Stefano Pironio, Valerio Scarani, and Stephanie Wehner, \emph{Bell nonlocality}, \href{https://doi.org/10.1103/RevModPhys.86.419}{Reviews of Modern Physics, {\bf 86}, 419 (2014)}.
+
+\bibitem{spekkens2007}
+Robert W. Spekkens, \emph{Evidence for the epistemic view of quantum states: A toy theory}, \href{https://doi.org/10.1103/PhysRevA.75.032110}{Physical Review A {\bf 75}, 032110 (2007)}.
+
+
+\bibitem{wood2015}
+Christopher J. Wood and Robert W. Spekkens, \emph{The lesson of causal discovery algorithms for quantum correlations: causal explanations of Bell-inequality violations require fine-tuning}, \href{https://doi.org/10.1088/1367-2630/17/3/033002}{New Journal of Physics {\bf 17}, 033002 (2015)}.
+
+\bibitem{pr-box}
+Sandu Popescu and Daniel Rohrlich, \emph{Quantum nonlocality as an axiom}, \href{https://doi.org/10.1007%2FBF02058098}{Foundations of Physics, {\bf 24}, 379–385 (1994)}.
+
+\bibitem{vandam2012}
+Wim van Dam, \emph{Implausible consequences of superstrong nonlocality}, \href{https://doi.org/10.1007/s11047-012-9353-6}{Natural Computing, {\bf 12}, 9–12 (2013)}.
+
+\bibitem{axler}
+Sheldon Axler, \emph{Linear Algebra Done Right}, 2nd ed., Springer (2004).
+
+
+\end{thebibliography}
+
+
+
+\end{document}
