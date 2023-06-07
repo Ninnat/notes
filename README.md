@@ -13,4 +13,4 @@ Part 1/2 of quantum information as parts of [IF Summer School for Young Physicis
 The notes cover 
 * An invitation to Shannon theory 
 * Linear algebra in the bra-ket notation, and a quick rundown of the quantum formalism in finite-dimensional spaces 
-* Communication using ebits (superdense coding, teleportation with an unusual proof), EPR argument, and the CHSH inequality via a nonlocal game
+* Communication using ebits (superdense coding, teleportation with perhaps an unusual proof), EPR argument, and the CHSH inequality via a nonlocal game
