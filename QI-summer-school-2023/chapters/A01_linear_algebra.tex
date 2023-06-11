@@ -138,7 +138,7 @@ Equivalently, any $u\in U$ can be specified by a unique pair $(v,w)\in V\times W
 
 
 %---------------------------------------------
-\subsection{Linear maps}
+\subsection{Linear maps, eigenvalues, and eigenvectors}
 %---------------------------------------------
 
 Morphisms that preserve the structure of vector spaces are linear maps.
@@ -222,7 +222,7 @@ $$[AB,CD] = [A,C]BD + A[B,C]D+ C[A,D]B + CA[B,D]$$
 
 
 %---------------------------------------------
-\subsection{Eigenvalues and eigenvectors}
+%\subsection{Eigenvalues and eigenvectors}
 %--------------------------------------------
 
 From this point onward, suppose that $\op T: U\to U$ maps a vector space to the same space. That is, $\op T$ is a linear operator.
@@ -243,7 +243,7 @@ No vector with real coefficients remain fixed under a rotation by an arbitrary a
 \begin{theorem}\label{thm:eigenvalue-exists}
 	In an algebraically closed field such as $\C$, every linear operator always possess at least one eigenvalue (and eigenvector).
 \end{theorem}
-\noindent The followings is a determinant  theorem can be proved without using the determinant as follows \cite{axler}.
+\noindent The following is a proof of this statement without using the determinant \cite{axler}.
 \begin{proof}
 	In an $n$-dimensional vector space $V$,
 	pick any nonzero vector $\ket{v}\in V$ and consider the set $\{\ket{v},\op T\ket{v},\op T^2 \ket{v},\dots,T^n \ket{v}\}$. Since the cardinality of the set is $n+1$, the set must be linearly \emph{dependent}. There exist $c_0,c_1,\cdots,c_n$, not all of them zero, such that
@@ -255,7 +255,7 @@ No vector with real coefficients remain fixed under a rotation by an arbitrary a
 	\begin{align}
 		c_0 + c_1z + c_2z^2 +\dots+c_nz^2 = \alpha \prod_{k=1}^n(z-\lambda_k).
 	\end{align}
-	Thus, some $\op T -\lambda_k\op\id$ must be the zero operator, and the input of such linear factor is an eigenvector of $\op T$.
+	Thus, some $\op T -\lambda_k\op\id$ must be the zero operator, and $\lambda_k$ is an eigenvalue of $\op T$.
 \end{proof}
 
 %---------------------------------------------
@@ -292,4 +292,4 @@ The \href{https://en.wikipedia.org/wiki/Singular_value_decomposition (SVD)}{sing
 \begin{align}
 	\op T = \sum_{j} \sigma_j \dyad{e_j}{f_j},
 \end{align}
-where the two orthonormal sets $\{\ket{e_j}\}_j$ and $\{\ket{f_k}\}_k$ are eigenvectors of $\op T\dgg \op T$ and $\op T \op T\dgg$, respectively, and $\sigma_j$ are non-negative \emph{singular values}. It is clear then, that the equality $\op T\op T\dgg = \op T\dgg\op T$ implies that the two orthonormal sets are the same i.e. it is the basis in which the matrix of $\op T$ is diagonal.
+where the two orthonormal sets $\{\ket{e_j}\}_j$ and $\{\ket{f_k}\}_k$ are eigenvectors of $\op T\dgg \op T$ and $\op T \op T\dgg$, respectively, and $\sigma_j$ are non-negative \emph{singular values}. It is clear then, that the equality $\op T\op T\dgg = \op T\dgg\op T$ implies that the two orthonormal sets are the same. That is, it is the basis in which the matrix of $\op T$ is diagonal.

@@ -43,16 +43,21 @@ This type of phase is commonly referred to as a {\bf global phase} as opposed to
 \subsection{Case study: qubit}
 %---------------------------------------------
 
-A two-level system, or a \emph{qubit}, is any quantum sustem that can be described by a two-dimensional Hilbert space. We denote the standard ONB as $\{\ket{0},\ket{1}\}$.
+A two-level system, or a \emph{qubit}, is any quantum system that can be described by a two-dimensional Hilbert space. We denote the standard ONB as $\{\ket{0},\ket{1}\}$.
 \begin{align}
 	\ket{\psi} &= \alpha\ket{0} + \beta\ket{1} \\
 	&=  ae^{i\gamma}\ket{0} + be^{i\delta}\ket{1} \mnf{Polar form where $a,b,\gamma,\delta$ are real numbers.} \\
-	&=e^{i\gamma}\left[\cos(\frac{\theta}{2})\ket{0} + e^{i\varphi}\cos(\frac{\theta}{2})\ket{1}\right] \mnf{ $a^2+b^2=1$ and $\varphi = \delta-\gamma$.}
+	&=e^{i\gamma}\biggl[{\color{maincolor}\underbrace{\cos(\frac{\theta}{2})}_{a}} \ket{0} + e^{i{\color{teal}\tikzmark{a}\varphi}} {\color{eqcolor}\underbrace{\sin(\frac{\theta}{2})}_{b}}\ket{1}\biggr]
 \end{align}
+\begin{tikzpicture}[remember picture,overlay]
+	\draw[<-] 
+	([shift={(3pt,6pt)}]a) |- ([shift={(10pt,20pt)}]a) 
+	node[anchor=west] {\scriptsize{\color{teal}$\delta-\gamma$}}; 
+\end{tikzpicture}
 By normalizing the state vector and eliminating the global phase, we have parametrized the state of a qubit by two spherical coordinate $0\le \theta \le \pi$ and $0\le \varphi < 2\pi$.
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.2]{fig/bloch-sphere.png}
+	\includegraphics[scale=0.75]{fig/bloch.pdf}
 	\caption{Space of qubit states is represented by the Bloch sphere.}
 	\label{}
 \end{figure}
@@ -91,25 +96,44 @@ Spin observable in any direction ${\bf \hat{n}}$
 \begin{align}
 	\hat\sigma_{\bf \hat n} \equiv \boldsymbol{\hat n\cdot\sigma} = \dyad{\bf \hat n} - \dyad{-\hat {\bf n}} \longleftrightarrow \mqty(\cos\theta && \sin\theta\,e^{-i\varphi} \\ \sin\theta\,e^{i \varphi} && \cos\theta) 
 \end{align}
-To further investigate how relation between the geometry of the Hilbert space and that of the Euclidean space (inner product $\implies$ geometry)
+To further investigate the relation between the geometry of the Hilbert space and that of the Euclidean space (inner product $\iff$ geometry), we need to know some properties of Pauli operators.
 
 \vspace{0.5em}
-\noindent{\bf Algebraic properties of Pauli operators}
+\noindent{\bf Algebraic properties of Pauli operators} 
 \begin{enumerate}
-	\item $\hat\sigma_j\dgg = \hat\sigma_j$
-	\item $\hat\sigma_j^2 = \id$
-	\item $\hat\sigma_j \hat\sigma_k = i\hat\sigma_l$ where $(j,k,l)$ are cyclic.
-	\item $\tr\hat\sigma_j=0$ (true for an arbitrary $\hat\sigma_{\bf \hat n}$.)
+	\item $\hat\sigma_j\dgg = \hat\sigma_j$,
+	\item $\hat\sigma_j^2 = \id$,
+	\item $\hat\sigma_j \hat\sigma_k = i\hat\sigma_l$ where $(j,k,l)$ are cyclic,
+	\item $\tr\sigma_j = 0$.
 \end{enumerate}
-Properties 2 and 3 can be written in a compact form using the Einstein summation convection as
-\begin{align}
-	\boxed{\hat\sigma_j \hat\sigma_k = \delta_{jk}\op\id + i\epsilon_{jkl}\hat\sigma_l}\, .
-\end{align}
-In particular, the commutator and the anticommutator are
+Properties 2 and 3 can be rephrased in terms of the commutator and the anticommutator are
 \begin{align}
 	[\hat\sigma_j,\hat\sigma_k] = 2i\epsilon_{jkl}\hat\sigma_l, &&
 	\{\hat\sigma_j,\hat\sigma_k\} = 2\delta_{jk}\op\id.
 \end{align}
+Both are encapsulated in the relation
+\begin{align}\label{eq:pauli-algebraic}
+	\boxed{\hat\sigma_j \hat\sigma_k = \delta_{jk}\op\id + i\epsilon_{jkl}\hat\sigma_l}\, ,
+\end{align}
+which can be summarized concisely as follows: {\bf Pauli matrices either commute or anticommute}.
+
+\vspace{0.5em}
+\noindent 
+{\bf Expectation value of Pauli observables.} 
+\begin{align}
+	\expval{\op\sigma_j}{\bf \hat{n}} &= \tr(\dyad{\bf \hat{n}}\hat\sigma_j) = \tr[\left(\frac{\op\id + \boldsymbol{\hat n \cdot \sigma}}{2}\right)\hat\sigma_j] \\
+	&= \frac{1}{2}\tr(\op\sigma_j + \sum_k n_k \hat\sigma_k \hat\sigma_j)
+\end{align}
+The only term whose trace does not vanish is the identity term from \eqref{eq:pauli-algebraic}. Therefore,
+\begin{align}
+	\expval{\op\sigma_j}{\bf \hat{n}} &= \frac{1}{2} \sum_k n_k \delta_{jk} \tr \op\id = n_j.
+\end{align}
+Since a general spin observable is just ${\bf \hat{n}}\cdot \boldsymbol{\sigma}$, the expectation value of spin in $\bf \hat{m}$ direction is ${\bf \hat{n}\cdot\hat{m}}$.
+One consequence of this result is that, to determine an unknown state of a two-level system, it is sufficient to find the expectation value of the three Pauli matrices.
+\begin{align}
+	\mqty(n_x \\ n_y \\ n_z) = \mqty(\av{\hat\sigma_x} \\ \av{\hat\sigma_y} \\ \av{\hat\sigma_z})
+\end{align}
+This is an example of \emph{quantum state tomography}.
 
 \begin{mybox}[Levi-Civita tensor]
 	The Levi-Civita tensor can be used to define the $d$-dimensional totally anti-symmetric vector product. In three dimension,
@@ -128,7 +152,7 @@ In particular, the commutator and the anticommutator are
 	A contraction of two Levi-Civita tensors gives an expression involving the Kronecker deltas.
 	\begin{align}
 		\epsilon_{jkl}\epsilon_{jmn} &= \delta_{km} \delta_{lm} - \delta_{kn} \delta_{lm}, 
-		\marginnote{$\delta_{jk}\delta_{jk} = \delta_{jj} = \tr \hat\id_{d\times d} = \dim$, dimension of the space}\\
+		\marginnote{$\delta_{jk}\delta_{jk} = \delta_{jj} = \tr \hat\id_{d\times d} = $ the dimension of the space}\\
 		\epsilon_{jkl}\epsilon_{jkm} &= \delta_{kk}\delta_{lm} - \delta_{km} \delta_{lm} = (\dim-1)\delta_{lm} = 2\delta_{lm}
 	\end{align}
 \end{mybox}
@@ -188,14 +212,14 @@ The Schr\"odinger equation relates an instantaneous change in the state vector t
 \subsection{*Looking ahead}
 %---------------------------------------------
 
-The Schr\"odinger equation applies to a closed system. ``Closed" here does not mean the absence of an energy or mass exchange with the surroundings; it means the absence of \emph{communication} with the outside world. For an \emph{open quantum system}, the quantum formalism has to be modifed as follow.
+The Schr\"odinger equation only applies to a closed system, but ``closed" here does not mean the absence of an energy or mass exchange with the surroundings; it means the absence of \emph{communication} with the outside world. Thus, it is more accurate to say that quantum phenomena happen to systems that are \emph{informationally isolated}. For an \emph{open quantum system}, the quantum formalism has to be modified as follows.
 
 \begin{empheq}[box=\fbox]{align}
 	\textrm{State} &\longleftrightarrow \textrm{Positive operator}  \\
 	\textrm{Measurement} &\longleftrightarrow \textrm{Positive operator} \\
 	\textrm{Dynamics} &\longleftrightarrow \textrm{Completely positive map}\mnf{The meaning of complete positivity is outside the scope of this lecture.}  
 \end{empheq}
-In any case, it is more accurate to say that quantum phenomena happen to systems that are \emph{informationally isolated}. Therefore, the notion of information is already baked into the formalism of quantum theory at a fundamental level.
+Therefore, the notion of information is already baked into the formalism of quantum theory at a fundamental level.
 In my opinion, Rolf Landauer's slogan ``information is physical" is at its most profound in the quantum world.
 
 

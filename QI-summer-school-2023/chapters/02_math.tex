@@ -16,7 +16,7 @@ The stationary states from a complete, orthonormal set
 	\int dx\, \varphi_n^* (x) \varphi_m(x) &= \delta_{nm}
 	\mnf{Orthonormality} \label{eq:orthogonality-function-space}  \\
 \sum_{n} \varphi_n^*(x) \varphi_n(x') &= \delta(x-x')
-\mnf{Completeness} \label{eq:completeness-function-space}
+\mnf{Completeness \mbox{(Closure relation)}} \label{eq:completeness-function-space}
 \end{empheq}
 The Dirac delta ``function" is a generalized function, also known as a distribution, and only has meaning inside an integral.
 \begin{align}
@@ -471,6 +471,7 @@ The most important result from linear algebra that lies at the foundation of qua
 	\op T = \sum_j \lambda_j \dyad{e_j} \longleftrightarrow \mqty(\lambda_1&&&&
 \\&\lambda_2&&\text{\huge0}&\\&&\lambda_3&&\\&\text{\huge0}&&\ddots&\\&&&&\lambda_n)
 \end{align}
+An extremely useful consequence
 As a result, we can take any analytic function of $\op T$ by taking the function of the eigenvalues directly. 
 
 \begin{definition}
@@ -478,10 +479,10 @@ As a result, we can take any analytic function of $\op T$ by taking the function
 	\begin{enumerate}
 		\item {\bf Hermitian} if $\op T\dgg = \op T$,
 		\item {\bf positive} if $\expval{\op T}{\psi} \ge 0$ for every $\ket{\psi}\in \hilb$,
-		\item a {\bf projection operator} if it is Hermitian and $\op T^2 = \op T$,\mn{Hermiticity is a necessary condition, as there is an operator that satisfies $\op T^2 = \op T$, but is not a projection operator: 
+		\item a {\bf projection operator} if it is Hermitian\mn{Hermiticity is a necessary condition, as there is an operator that satisfies $\op T^2 = \op T$, but is not a projection operator: 
 		\begin{align*}
 			\mqty(1&1\\0&0).	
-		\end{align*}}
+		\end{align*}} and $\op T^2 = \op T$,
 		\item {\bf unitary} if $\op T \op T\dgg = \op T\dgg \op T = \op\id$.
 	\end{enumerate}
 \end{definition}
@@ -548,8 +549,19 @@ Relations between subclasses of normal operators are visualized as a Venn diagra
 \end{proof}
 
 \begin{lemma}\label{}
-	Since any unitary operator is normal, $\op T\dgg \op T = \op\id \iff \op T\op T\dgg = \op\id$ in finite dimensions.\mn{A counterexample in an infinite dimension: the left shift $\op L$ \eqref{eq:left-shift} and the right shift $\op R$ \eqref{eq:right-shift} are adjoints of each other, and it is obvious that $\op L\op R =\op\id$, but $\op R\op L\neq \op\id$ because the left shift irrecoverbly kills the first component of a vector.}
+    $\op T\dgg \op T = \op\id \iff \op T\op T\dgg = \op\id$ in finite dimensions.
 \end{lemma}
+
+\begin{proof}
+    Suppose that $\{\ket{e_j}\}$ is an ONB. Since $\op T\dgg\op T=\op\id$, $\ket{f_j} = \op T\ket{e_j}$ also form an ONB. Furthermore,
+    \begin{align}
+        \ket{f_j} = \op T\ket{e_j} = \op T \op T\dgg \op T\ket{e_j} = \op T\op T\dgg \ket{f_j}.
+    \end{align}
+    
+    to be true for any $j$, it must be the case that $\op T \op T\dgg=\op\id$. The proof in the inverse direction proceeds similarly.
+
+    The proof fails in infinite dimension. Despite the fact that $\{\ket{f_j}\}$ is an orthonormal set of infinite cardinality, there is no guarantee that it spans $\hilb$. For an explicit counterexample, consider the left shift $\op L$ \eqref{eq:left-shift} and the right shift $\op R$ \eqref{eq:right-shift}. They are adjoints of each other (check this!), and it is evident that $\op L\op R =\op\id$, but $\op R\op L\neq \op\id$ because the left shift irrecoverbly kills the first component of any vector.
+\end{proof}
 
 
 

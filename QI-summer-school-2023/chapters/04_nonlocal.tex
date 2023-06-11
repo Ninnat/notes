@@ -73,7 +73,7 @@ If one wants to represent a tensor product operator in a matrix form, one needs 
 \end{align}
 
 \begin{mybox}
-The concept of tensor product is typically introduced to studentss in a highly unintuitive setting of quantum theory, and as a result, the idea may appear alien at first. However, the tensor product is already present in ordinary probability theory as a self-evident means of combining the probabilities of two independent random variables.
+The concept of tensor product is typically introduced to students in a highly unintuitive setting of quantum theory, and as a result, the idea may appear alien at first. However, the tensor product is already present in ordinary probability theory as a self-evident means of combining the probabilities of two independent random variables.
 \begin{align}
 	\mqty(p \\ 1-p) \otimes \mqty(q\\1-q) = \mqty(pq \\ p(1-q) \\ (1-p)q \\ (1-p)(1-q))
 \end{align}
@@ -119,13 +119,21 @@ Alternatively, they can be arranged in a convenient form,
 \begin{lemma}\label{}
 	For any linear operator $\op T$,
 	\begin{align}
-		\op\id\otimes \op T\ket{\Omega} = \op T^T \otimes \op\id \ket{\Omega},
+		\op\id\otimes \op T\ket{\Omega} = \op T^t \otimes \op\id \ket{\Omega},
 	\end{align}
-	where $^T$ denotes the matrix transposition. In particular, we have that
+	where $^t$ denotes the matrix transposition in the standard basis $\{\ket{0},\ket{1}\}$. In particular, we have that
 	\begin{align}
 		\ket{\Omega_{11}} = \op\id\otimes \op X\op Z\ket{\Omega} = \op Z\op X \otimes \op\id \ket{\Omega}.
 	\end{align}
 \end{lemma}
+
+\begin{proof}
+    \begin{align}
+       \op\id\otimes\op T\sum_j \ket{j}_A \ket{j}_B &= \sum_{jk} \ket{j}_A \ket{k}_B\bra{k} \op T \ket{j}_B \\
+       &= \sum_k \underbrace{\sum_j  (T^t)_{jk} \ket{j}_A}_{\op T^t \ket{k}_A}\ket{k}_B
+       = \op T^t \otimes \op\id \ket{\Omega}
+    \end{align} 
+\end{proof}
 
 
 In the followings, we suppress the tensor product symbol when writing two-body Pauli operators: $\op \sigma_j \op \sigma_k = \op \sigma_j \otimes \op \sigma_k$.
@@ -187,7 +195,7 @@ Let the subscripts $A,B$, and $C$ denote the Hilbert space of Alice's unknown qu
 		&= \frac{1}{2} \sum_j \braket{j}{\psi'} \ket{j}_C\\
 		&= \frac{1}{2} \ket{\psi'}_C
 	\end{align}
-	The subnormalization factor 1/2 tells us that the outcome probability for the Bell measurement is uniform.
+	The subnormalization factor 1/2 tells us that the outcome probabilities for the Bell measurement are uniform.
 
 
 %---------------------------------------------
@@ -289,7 +297,7 @@ Specialize to the measurement angles given in...
 \end{align}
 where the expectation value is taken with respect to the singlet state.
 
-The original form of the CHSH inequality, $S_{\textrm{classical}} \le 2$, is phrased in terms of expectation values, or two-point correlation functions,
+The original form of the CHSH inequality, $S_{\textrm{classical}} \le 2$, is phrased in terms of expectation values, especially two-point correlation functions,
 \begin{align}
 	S = \abs{\av{\op \sigma_{00}} + \av{\op \sigma_{01}} + \av{\op \sigma_{10}} - \av{\op \sigma_{11}}}.
 \end{align}
